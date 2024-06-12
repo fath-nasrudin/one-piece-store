@@ -3,9 +3,25 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+const mongoose = require('mongoose');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+
+// making connection to database
+const localDB = 'mongodb://localhost:27017/'
+mongoose.set('strictQuery', false);
+(async function main() {
+  await mongoose.connect(process.env.MONGODB_URI || localDB)
+})()
+  .then(() => {
+    if (!process.env.MONGODB_URI) {
+      console.info('connected to LOCAL database');
+    } else {
+      console.info('connected to database');
+    }
+  })
+  .catch(() => console.log('Failed to connect to Database'));
 
 var app = express();
 
