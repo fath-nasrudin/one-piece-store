@@ -38,6 +38,7 @@ module.exports.validateNumber = (bodyName = 'number') => {
 
 module.exports.validateMongoId = (bodyName = '_id') => {
   return body(bodyName)
+    .optional()
     .trim()
     .escape()
     .isMongoId().withMessage(`${bodyName} must be a valid ObjectId`)
