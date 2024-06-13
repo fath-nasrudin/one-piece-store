@@ -20,7 +20,7 @@ button {
   font-size: 100%;
 }
 
-input {
+input, select, option, textarea {
   font-size: 100%;
   padding-inline: 16px;
   padding-block: 8px;
