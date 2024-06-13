@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="stylesheets/style.css" />
+    <script src="javascripts/main.js" defer></script>
+  </head>
+  <body>
+    <div class="main-layout">
+      <header class="main-layout__header main-header">
+        <div>
+          <button class="leftbar-toggle btn">Categories</button>
+          <div class="leftbar-box-overlay hidden">
+            <div class="leftbar-box full-height bg-primary hidden">
+              <%- include('../category_list') %>
+            </div>
+          </div>
+        </div>
+        <div class="logo">One Piece Store</div>
+      </header>
+      <div class="main-layout__leftbar">
+        <%- include('../category_list') %>
+      </div>
+
+      <div class="main-layout__main">

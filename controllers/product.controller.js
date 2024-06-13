@@ -1,7 +1,21 @@
 const asyncHandler = require('express-async-handler');
+const Category = require('../models/category');
+const Product = require('../models/product');
 
 module.exports.getProductList = asyncHandler(async (req, res) => {
-  res.send('getProductList: NOT YET IMPLEMENTED');
+  const { category } = req.query;
+  const productFilters = {};
+  if (category) productFilters.categories = category;
+
+  const [categories, products] = await Promise.all([
+    Category.find(),
+    Product.find(productFilters),
+  ]);
+
+  res.render('product_list', {
+    categories,
+    products,
+  });
 });
 
 module.exports.getProductDetail = asyncHandler(async (req, res) => {

@@ -1,0 +1,18 @@
+<%- include('shared/header') %>
+<div class="card-container">
+  <% if (products) { %>
+   <% products.forEach(product => { %>
+      <a href= <%= `/products/${product._id}` %>> 
+        <div class="card card__primary-action">
+          <div class="card__content">
+            <div><%= product.name %></div>
+            <div><%= product.price %></div>
+            <div>stock <%= product.stock %></div>
+          </div>
+        </div>
+      </a>
+   <% }) %>
+  <% } %>
+</div>
+
+<%- include('shared/footer') %>

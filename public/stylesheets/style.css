@@ -1,8 +1,231 @@
+/* Reset */
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
 body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  line-height: 1.4;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
 a {
-  color: #00B7FF;
+  font: inherit;
+  text-decoration: none;
+  color: inherit;
 }
+
+button {
+  font-size: 100%;
+}
+
+/* ==================== */
+/* LAYOUT               */
+/* ==================== */
+.main-layout {
+  min-height: 100vh;
+  max-width: 960px;
+  padding-inline: 16px;
+  margin-inline: auto;
+
+  display: grid;
+  column-gap: 16px;
+  row-gap: 8px;
+  grid-template-columns: repeat(12, 1fr);
+  align-content: start;
+}
+
+.main-layout > * {
+  border: 1px solid rgba(0, 0, 0, 0.137);
+}
+
+.main-layout__header {
+  grid-column: 1 / -1;
+}
+
+.main-layout__leftbar {
+  grid-column: 1 / -1;
+  display: none;
+}
+
+.main-layout__main {
+  grid-column: 1 / -1;
+}
+
+@media screen and (min-width: 768px) {
+  .main-layout__leftbar {
+    grid-column: 1 / 4;
+    display: block;
+  }
+
+  .main-layout__main {
+    grid-column: 4 / -1;
+  }
+}
+
+/* header */
+.main-header {
+  padding: 16px;
+
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.logo {
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+
+/* Leftbar Hidden Component */
+/* Note: dont forget to include the JS */
+.leftbar-toggle {
+  display: block;
+}
+
+@media screen and (min-width: 768px) {
+  .leftbar-toggle {
+    display: none;
+  }
+}
+
+.leftbar-box-overlay {
+  z-index: 2;
+  position: fixed;
+  width: 100vw;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: block;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.223);
+  backdrop-filter: blur(6.8px);
+  -webkit-backdrop-filter: blur(6.8px);
+}
+
+.leftbar-box-overlay:not(.hidden) {
+  display: block;
+}
+
+.leftbar-box {
+  position: fixed;
+  width: min(300px, 80vw);
+  min-height: 100vh;
+}
+
+.leftbar-box:not(.hidden) {
+  display: block;
+}
+
+/* END Leftbar Hidden Component */
+
+/* === Card Component === */
+.card-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 16px;
+
+}
+
+.card {
+  border-radius: 8px;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+}
+
+.card__primary-action {
+  cursor: pointer;
+}
+
+.card__content {
+  padding-block: 16px;
+  padding-inline: 16px;
+}
+
+/* === TabList Component === */
+.tablist {
+  display: flex;
+  flex-direction: column;
+}
+.tablist > * {
+  border: 1px solid rgba(0, 0, 0, 0.297);
+}
+
+.tablist a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.tablist__item {
+  padding: 8px;
+
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 8px;
+}
+
+/* === button Component === */
+.btn {
+  padding: 8px 16px;
+  background-color: transparent;
+  border: 1px solid black;
+  cursor: pointer;
+}
+
+.btn--sm {
+  padding: 4px 8px;
+  font-size: 0.825rem;
+}
+
+/* ==================== */
+/* UTILITES             */
+/* ==================== */
+
+/* === appearance   === */
+.hidden {
+  display: none !important;
+}
+
+.mr-auto {
+  margin-right: auto;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.full-height {
+  height: 100%;
+}
+
+.flex {
+  display: flex;
+}
+
+.flex-1 {
+  flex: 1;
+}
+
+.flex-col {
+  display: flex;
+  flex-direction: column;
+}
+
+.gap-4 {
+  gap: 16px;
+}
+
+.bg-primary {
+  background-color: hsl(0, 0%, 100%);
+}
+
+.bg-red {
+  background-color: rgb(236, 71, 71);
+}
+
+.bg-blue {
+  background-color: rgb(18, 154, 245);
+}
+

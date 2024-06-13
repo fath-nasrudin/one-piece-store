@@ -1,0 +1,25 @@
+<div class="flex-col gap-4">
+  <div class="tablist">
+    <div class="tablist__item">
+      <a class="flex-1" href='/products'>All</a>
+    </div>
+
+    <% if (categories && categories.length) { %> 
+        <% categories.forEach(category => { %>
+          <div class="tablist__item"> 
+            <a class="flex-1" href=<%= `/products?category=${category._id}` %>>
+                <%= category.name %>
+            </a>
+            <a href=<%= `/categories/${category._id}/update` %>>
+              <button class="btn  btn--sm">Edit</button>
+            </a>
+            <a href=<%= `/categories/${category._id}/delete` %>>
+              <button class="btn  btn--sm">Del</button>
+            </a>
+          </div>
+        <% }) %>
+    <% } %>
+
+  </div>
+  <a><button class="btn full-width">Add Category</button></a>
+</div>
