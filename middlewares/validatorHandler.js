@@ -30,7 +30,10 @@ module.exports.validateNumber = (bodyName = 'number') => {
   return body(bodyName)
     .trim()
     .escape()
-    .isNumeric().withMessage(`${bodyName} must be a number`)
+    .customSanitizer(value => !value ? 0 : value)
+    .not().isAlpha().withMessage(`${bodyName} must be a number`)
+    .toInt()
+
 };
 
 module.exports.validateMongoId = (bodyName = '_id') => {
