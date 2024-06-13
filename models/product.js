@@ -1,0 +1,17 @@
+const mongoose = require('mongoose');
+
+const Schema = mongoose.Schema;
+
+const productSchema = new Schema({
+  name: { type: String, required: true },
+  description: String,
+  price: Number,
+  stock: Number,
+  category: {Type: Schema.Types.ObjectId, ref: 'Category'},
+});
+
+productSchema.virtual('url').get(function() {
+  return `/categories/${this._id}`;
+});
+
+module.exports = mongoose.model('Product', productSchema);
