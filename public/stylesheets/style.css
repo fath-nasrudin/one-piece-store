@@ -192,6 +192,18 @@ button {
   margin-right: auto;
 }
 
+.mb-8 {
+  margin-bottom: 32px;
+}
+
+.mt-4 {
+  margin-top: 16px;
+}
+
+.mt-8 {
+  margin-top: 32px;
+}
+
 .full-width {
   width: 100%;
 }
@@ -229,3 +241,14 @@ button {
   background-color: rgb(18, 154, 245);
 }
 
+.text-red {
+  color: rgb(240, 61, 61);
+}
+
+.text-center {
+  text-align: center;
+}
+
+.fs-300 {
+  font-size: 0.825rem;
+}
