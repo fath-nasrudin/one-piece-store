@@ -179,6 +179,18 @@ button {
   font-size: 0.825rem;
 }
 
+/* === form Component === */
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
 /* ==================== */
 /* UTILITES             */
 /* ==================== */
