@@ -20,6 +20,12 @@ button {
   font-size: 100%;
 }
 
+input {
+  font-size: 100%;
+  padding-inline: 16px;
+  padding-block: 8px;
+}
+
 /* ==================== */
 /* LAYOUT               */
 /* ==================== */
