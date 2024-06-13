@@ -1,0 +1,26 @@
+<%- include('shared/header2') %>
+  <div>
+    <h1 class="text-center mb-8"><%= title %></h1>
+    <form class="form" method="post">
+      <div class="form-group">
+        <label for="name">Name</label>
+        <input 
+          id="name"
+          type="text"
+          name="name"
+          placeholder="category name"
+          value=<%= category ? category.name : '' %>
+        > 
+      </div>
+
+      <button type="submit" class="btn">Submit</button>
+    </form>
+    <% if (errors) { %>
+      <ul class="text-red fs-300 mt-4">
+        <% errors.forEach(error => { %>
+          <li><%= error.msg %></li>
+        <% }) %>
+      </ul>
+    <% } %>
+  </div>
+<%- include('shared/footer') %>
