@@ -8,7 +8,7 @@ const mongoose = require('mongoose');
 var routes = require('./routes');
 
 // making connection to database
-const localDB = 'mongodb://localhost:27017/'
+const localDB = 'mongodb://localhost:27017/one-piece-store'
 mongoose.set('strictQuery', false);
 (async function main() {
   await mongoose.connect(process.env.MONGODB_URI || localDB)
