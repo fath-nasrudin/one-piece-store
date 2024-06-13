@@ -3,10 +3,8 @@ const ProductController = require('../controllers/product.controller');
 
 router.route('/').get(ProductController.getProductList);
 
-router.route('/:id').get(ProductController.getProductDetail);
-
 router
-  .route('/:id/create')
+  .route('/create')
   .get(ProductController.getAddProduct)
   .post(ProductController.postAddProduct);
 
@@ -19,5 +17,7 @@ router
   .route('/:id/delete')
   .get(ProductController.getDeleteProduct)
   .post(ProductController.postDeleteProduct);
+
+router.route('/:id').get(ProductController.getProductDetail);
 
 module.exports = router;

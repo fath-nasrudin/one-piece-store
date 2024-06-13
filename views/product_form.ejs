@@ -1,0 +1,104 @@
+<%- include('shared/header2') %>
+  <div>
+    <h1 class="text-center mb-8"><%= title %></h1>
+
+    <form class="form" method="post">
+
+      <%# Name %>
+      <div class="form-group">
+        <label for="name">Product Name</label>
+        <input 
+          id="name"
+          type="text"
+          name="name"
+          placeholder="product name"
+          value="<%= product ? product.name : '' %>"
+          required
+        > 
+      </div>
+
+      <%# Category field %>
+      <div class="form-group">
+        <label for="categories">Category</label>
+        <select name="categories" id="categories" multiple>
+          <option value="">Selece some categories</option>
+          
+          <% if (categories) { %>
+            <% categories.forEach( category => { %>
+              <%# for each category, print %>
+              <% let isPrinted = false %>
+              <% if (product) { %>
+                <% product.categories.forEach(prodCategory => { %>
+                  <% if (prodCategory._id.toString() === category._id.toString()) { %>
+                    <option value="<%= category._id %>" selected>
+                      <%= category.name %>
+                    </option>
+                    <% isPrinted = true %>
+                  <% } %>
+                <% }) %>
+              <% } %>
+
+              <%# tapi jika ada product, loop %>
+              <%# yang nggak nemu pasangannya, skip %>
+              <% if (!isPrinted) { %>
+                <option value="<%= category._id %>">
+                  <%= category.name %>
+                </option>
+              <% } %>
+            <% }) %>
+          <% }%>
+        </select>
+      </div>
+      
+      <%# Price field %>
+      <div class="form-group">
+        <label for="price">Price</label>
+        <input 
+          id="price"
+          type="number"
+          name="price"
+          placeholder="1200000"
+          value="<%= product ? product.price : '' %>"
+        > 
+      </div>
+
+      <%# Stock field %>
+      <div class="form-group">
+        <label for="stock">Stock</label>
+        <input 
+          id="stock"
+          type="number"
+          name="stock"
+          placeholder="10"
+          value="<%= product ? product.stock : '' %>"
+        > 
+      </div>
+
+      <%# Description field %>
+      <div class="form-group">
+        <label for="description">Description</label>
+        <textarea 
+          name="description" 
+          id="description" 
+          cols="30" 
+          rows="10"
+        ><%= product ? product.description : '' %></textarea>
+      </div>
+
+      <button type="submit" class="btn">Submit</button>
+      <a href="/products" class="btn full-width">
+        Cancel
+      </a>
+
+    </form>
+
+    <% if (errors) { %>
+      <ul class="text-red fs-300 mt-4 mb-8">
+        <% errors.forEach(error => { %>
+          <li><%= error.msg %></li>
+        <% }) %>
+      </ul>
+    <% } %>
+
+  </div>
+<%- include('shared/footer') %>
