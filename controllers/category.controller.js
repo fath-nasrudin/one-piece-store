@@ -41,12 +41,44 @@ module.exports.postAddCategory = [
 ];
 
 module.exports.getUpdateCategory = asyncHandler(async (req, res) => {
-  res.send('getUpdateCategory: NOT YET IMPLEMENTED');
+  const category = await Category.findById(req.params.id);
+  console.log({category})
+  res.render('category_form', {
+    title: 'Edit Category',
+    category,
+    errors: null,
+  })
 });
 
-module.exports.postUpdateCategory = asyncHandler(async (req, res) => {
-  res.send('postUpdateCategory: NOT YET IMPLEMENTED');
-});
+module.exports.postUpdateCategory = [
+  validateName(),
+  asyncHandler(async (req, res, next) => {
+    const errors = validationResult(req);
+
+    const newCategoryData = {
+      name: req.body.name,
+    }
+
+    if (!errors.isEmpty()) {
+      res.render('category_form', {
+        title: 'Edit Category',
+        category: newCategoryData,
+        errors: errors.array(),
+      })
+      return;
+    }
+
+    const category = await Category.findByIdAndUpdate(req.params.id, newCategoryData);
+
+    if (!category) {
+      const err = new Error('Category Not Found');
+      err.status = 404;
+      next(err)
+    }
+
+    res.redirect('/products');
+  })
+];
 
 module.exports.getDeleteCategory = asyncHandler(async (req, res) => {
   res.send('getDeleteCategory: NOT YET IMPLEMENTED');
