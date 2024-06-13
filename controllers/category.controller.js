@@ -42,7 +42,6 @@ module.exports.postAddCategory = [
 
 module.exports.getUpdateCategory = asyncHandler(async (req, res) => {
   const category = await Category.findById(req.params.id);
-  console.log({category})
   res.render('category_form', {
     title: 'Edit Category',
     category,
