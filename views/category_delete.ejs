@@ -1,0 +1,13 @@
+<%- include('shared/header2') %>
+  <div>
+    <h1 class="text-center"><%= title %></h1>
+    <h2 class="text-center"><%= category.name %></h2>
+
+    <form class="form mt-8" method="post">
+      <p>Are you sure want to delete <strong><%= category.name %></strong>?</p>
+
+      <button type="submit" class="btn btn--red">Delete</button>
+      <a href="/products" class="btn full-width">Cancel</a>
+    </form>
+  </div>
+<%- include('shared/footer') %>

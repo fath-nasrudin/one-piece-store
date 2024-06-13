@@ -79,10 +79,29 @@ module.exports.postUpdateCategory = [
   })
 ];
 
-module.exports.getDeleteCategory = asyncHandler(async (req, res) => {
-  res.send('getDeleteCategory: NOT YET IMPLEMENTED');
+module.exports.getDeleteCategory = asyncHandler(async (req, res, next) => {
+  const category = await Category.findById(req.params.id);
+
+  if (!category) {
+      const err = new Error('Category Not Found');
+      err.status = 404;
+      next(err)
+    }
+
+ res.render('category_delete', {
+  title: 'Delete Category',
+  category,
+ })
 });
 
-module.exports.postDeleteCategory = asyncHandler(async (req, res) => {
-  res.send('postDeleteCategory: NOT YET IMPLEMENTED');
+module.exports.postDeleteCategory = asyncHandler(async (req, res, next) => {
+  const category = await Category.findByIdAndDelete(req.params.id);
+
+  if (!category) {
+      const err = new Error('Category Not Found');
+      err.status = 404;
+      next(err)
+    }
+
+ res.redirect('/products');
 });
