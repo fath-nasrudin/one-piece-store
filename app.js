@@ -4,6 +4,9 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 const mongoose = require('mongoose');
+const compression = require('compression');
+const helmet = require('helmet');
+const rateLimiter = require('express-rate-limit');
 
 var routes = require('./routes');
 
@@ -33,6 +36,14 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+
+
+app.use(rateLimiter({ // set max 20 request per minutes
+  windowMs: 1 * 60 * 1000, // 60 seconds
+  max: 20,
+}))
+app.use(compression());
+app.use(helmet());
 
 app.use('/', routes);
 
