@@ -207,6 +207,19 @@ input, select, option, textarea {
   gap: 8px;
 }
 
+/* === pill Component === */
+.pill-container {
+  display: flex;
+  gap: 8px;
+}
+
+.pill {
+  padding: 2px 6px;
+  border-radius: 16px;
+  border: 1px solid black;
+  cursor: pointer;
+}
+
 /* ==================== */
 /* UTILITES             */
 /* ==================== */
