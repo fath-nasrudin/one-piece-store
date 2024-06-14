@@ -1,0 +1,30 @@
+<%- include('shared/header2') %>
+
+  <h1 class="text-center"><%= title %></h1>
+
+  <div class="card mt-8">
+    <div class="card__content">
+      <div>
+        <h2 class="text-center"><%= product.name %></h2>
+        <div class="pill-container justify-center">
+          <% if (product.categories) { %>
+            <% product.categories.forEach(prodCategory => { %>
+              <a class="pill fs-300" href="<%= `/products?category=${prodCategory._id}` %>"><%= prodCategory.name %></a>
+            <% }) %>
+          <% } %>
+        </div>
+        <p>Price: <%= product.price %></p>
+        <p>Stock: <%= product.stock %></p>
+      </div>
+      <div>
+        <p><%= product.description %></p>
+      </div>
+      <div class="card__actions">
+        <a class="btn" href="<%= `/products/${product._id}/update` %>">Edit</a>
+        <a class="btn" href="<%= `/products/${product._id}/delete` %>">Delete</a>
+      </div>
+
+    </div>
+  </div>
+
+<%- include('shared/footer') %>

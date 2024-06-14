@@ -19,8 +19,20 @@ module.exports.getProductList = asyncHandler(async (req, res) => {
   });
 });
 
-module.exports.getProductDetail = asyncHandler(async (req, res) => {
-  res.send('getProductDetail: NOT YET IMPLEMENTED');
+module.exports.getProductDetail = asyncHandler(async (req, res, next) => {
+  const product = await Product.findById(req.params.id).populate('categories', 'name');
+
+  if (!product) {
+    const err = new Error('Product not found');
+    err.status = 404;
+    next(err);
+    return;
+  }
+
+  res.render('product_detail', {
+    title: 'Detail Product',
+    product,
+  })
 });
 
 module.exports.getAddProduct = asyncHandler(async (req, res) => {
