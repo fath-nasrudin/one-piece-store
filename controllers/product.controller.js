@@ -143,10 +143,30 @@ module.exports.postUpdateProduct = [
   })
 ];
 
-module.exports.getDeleteProduct = asyncHandler(async (req, res) => {
-  res.send('getDeleteProduct: NOT YET IMPLEMENTED');
+module.exports.getDeleteProduct = asyncHandler(async (req, res, next) => {
+
+  const product = await Product.findById(req.params.id);
+  if (!product) {
+    const err = new Error('Product not found');
+    err.status = 404;
+    next(err);
+    return;
+  }
+
+  res.render('product_delete', {
+    title: 'Delete Product',
+    product,
+  })
 });
 
-module.exports.postDeleteProduct = asyncHandler(async (req, res) => {
-  res.send('postDeleteProduct: NOT YET IMPLEMENTED');
+module.exports.postDeleteProduct = asyncHandler(async (req, res, next) => {
+  const product = await Product.findByIdAndDelete(req.params.id);
+  if (!product) {
+    const err = new Error('Product not found');
+    err.status = 404;
+    next(err);
+    return;
+  }
+
+  res.redirect('/products')
 });
