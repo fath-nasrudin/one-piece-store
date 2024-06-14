@@ -79,7 +79,7 @@ module.exports.postAddProduct = [
     }
 
     await product.save();
-    res.redirect('/products');
+    res.redirect(`/products/${product._id}`);
   })
 ];
 
@@ -139,7 +139,7 @@ module.exports.postUpdateProduct = [
       return;
     }
 
-    res.redirect('/products');
+    res.redirect(`/products/${product._id}`);
   })
 ];
 

@@ -90,7 +90,7 @@
       </div>
 
       <button type="submit" class="btn">Submit</button>
-      <a href="/products" class="btn full-width">
+      <a href="/products<%= product?._id ? `/${product._id}` : '' %>" class="btn full-width">
         Cancel
       </a>
 
