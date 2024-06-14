@@ -27,9 +27,15 @@
             <% categories.forEach( category => { %>
               <%# for each category, print %>
               <% let isPrinted = false %>
+
+              <%# if a category has selected before, mark it as selected %>
               <% if (product) { %>
                 <% product.categories.forEach(prodCategory => { %>
-                  <% if (prodCategory._id.toString() === category._id.toString()) { %>
+                  <% (prodCategory !== null && typeof prodCategory === 'object')
+                    ? prodCategory = prodCategory._id.toString()
+                    : prodCategory  
+                  %>
+                  <% if ( prodCategory === category._id.toString()) { %>
                     <option value="<%= category._id %>" selected>
                       <%= category.name %>
                     </option>
@@ -38,8 +44,6 @@
                 <% }) %>
               <% } %>
 
-              <%# tapi jika ada product, loop %>
-              <%# yang nggak nemu pasangannya, skip %>
               <% if (!isPrinted) { %>
                 <option value="<%= category._id %>">
                   <%= category.name %>

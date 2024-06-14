@@ -83,13 +83,65 @@ module.exports.postAddProduct = [
   })
 ];
 
-module.exports.getUpdateProduct = asyncHandler(async (req, res) => {
-  res.send('getUpdateProduct: NOT YET IMPLEMENTED');
+module.exports.getUpdateProduct = asyncHandler(async (req, res, next) => {
+
+  const [product, categories] = await Promise.all([
+    Product.findById(req.params.id).populate('categories'),
+    Category.find(),
+  ])
+
+  if (!product) {
+    const err = new Error('Product not found');
+    err.status = 404;
+    next(err);
+    return;
+  }
+
+  res.render('product_form', {
+    title: 'Edit Product',
+    categories,
+    product,
+    errors: null,
+  })
 });
 
-module.exports.postUpdateProduct = asyncHandler(async (req, res) => {
-  res.send('postUpdateProduct: NOT YET IMPLEMENTED');
-});
+module.exports.postUpdateProduct = [
+  validator.validateName(),
+  validator.validateNumber('stock'),
+  validator.validateNumber('price'),
+  validator.validateString('description', {max: 1000}),
+  validator.validateMongoId('categories'),
+  asyncHandler(async (req, res, next) => {
+
+    if (
+      req.body.categories &&
+      !Array.isArray(req.body.categories)) {
+        req.body.categories = [req.body.categories]
+    }
+    
+    const errors = validator.validationResult(req);
+    if (!errors.isEmpty()) {
+      const categories = await Category.find();
+      res.render('product_form',{
+        title: 'Add Product',
+        product: req.body,
+        categories: categories,
+        errors: errors.array(),
+      });
+      return;
+    }
+
+    const product = await Product.findByIdAndUpdate(req.params.id, req.body);
+    if (!product) {
+      const err = new Error('Product not found');
+      err.status = 404;
+      next(err);
+      return;
+    }
+
+    res.redirect('/products');
+  })
+];
 
 module.exports.getDeleteProduct = asyncHandler(async (req, res) => {
   res.send('getDeleteProduct: NOT YET IMPLEMENTED');
