@@ -21,6 +21,7 @@ button {
 }
 
 input, select, option, textarea {
+  font-family: inherit;
   font-size: 100%;
   padding-inline: 16px;
   padding-block: 8px;
