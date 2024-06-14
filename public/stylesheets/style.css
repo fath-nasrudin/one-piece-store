@@ -270,6 +270,10 @@ input, select, option, textarea {
   gap: 16px;
 }
 
+.justify-center {
+  justify-content: center;
+}
+
 .bg-primary {
   background-color: hsl(0, 0%, 100%);
 }
