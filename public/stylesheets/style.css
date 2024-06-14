@@ -147,6 +147,15 @@ input, select, option, textarea {
 .card__content {
   padding-block: 16px;
   padding-inline: 16px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.card__actions {
+  display: flex;
+  gap: 8px;
 }
 
 /* === TabList Component === */
