@@ -1,17 +1,20 @@
 const router = require('express').Router();
 const ProductController = require('../controllers/product.controller');
+const upload = require('../middlewares/imageHandler');
+
+// add image handler middleware
 
 router.route('/').get(ProductController.getProductList);
 
 router
   .route('/create')
   .get(ProductController.getAddProduct)
-  .post(ProductController.postAddProduct);
+  .post(upload.single('image'), ProductController.postAddProduct);
 
 router
   .route('/:id/update')
   .get(ProductController.getUpdateProduct)
-  .post(ProductController.postUpdateProduct);
+  .post(upload.single('image'), ProductController.postUpdateProduct);
 
 router
   .route('/:id/delete')

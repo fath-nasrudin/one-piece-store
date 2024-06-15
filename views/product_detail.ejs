@@ -2,7 +2,12 @@
 
   <h1 class="text-center"><%= title %></h1>
 
-  <div class="card mt-8">
+  <div class="card product-detail mt-8">
+    <% if (product.imageUrl) { %>
+      <div class="media__card">
+        <img src="<%= product.imageUrl %>" alt="image">
+      </div>
+    <% } %>
     <div class="card__content">
       <div>
         <h2 class="text-center"><%= product.name %></h2>

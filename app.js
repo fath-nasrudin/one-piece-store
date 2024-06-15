@@ -43,7 +43,12 @@ app.use(rateLimiter({ // set max 20 request per minutes
   max: 20,
 }))
 app.use(compression());
-app.use(helmet());
+app.use(helmet.contentSecurityPolicy({
+    useDefaults: true,
+    directives: {
+      'img-src': ["'self'", 'data:', 'https://res.cloudinary.com']
+    }
+  }));
 
 app.use('/', routes);
 

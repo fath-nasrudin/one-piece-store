@@ -2,6 +2,7 @@ const asyncHandler = require('express-async-handler');
 const Category = require('../models/category');
 const Product = require('../models/product');
 const validator = require('../middlewares/validatorHandler');
+const { uploadImage, deleteImage } = require('../services/Image.service');
 
 module.exports.getProductList = asyncHandler(async (req, res) => {
   const { category } = req.query;
@@ -52,6 +53,11 @@ module.exports.postAddProduct = [
   validator.validateString('description', {max: 1000}),
   validator.validateMongoId('categories'),
   asyncHandler(async (req, res) => {
+    let imageUrl = null;
+    if (req.file) {
+      const result = await uploadImage(req.file.buffer, {folder: 'one-piece-store'});
+      imageUrl = result.secure_url;
+    }
 
     if (
       req.body.categories &&
@@ -64,6 +70,7 @@ module.exports.postAddProduct = [
       price: req.body.price,
       stock: req.body.stock,
       categories: req.body.categories,
+      imageUrl: await imageUrl,
     })
 
     const errors = validator.validationResult(req);
@@ -112,6 +119,16 @@ module.exports.postUpdateProduct = [
   validator.validateString('description', {max: 1000}),
   validator.validateMongoId('categories'),
   asyncHandler(async (req, res, next) => {
+    if (req.file && !req.body.deleteImage) {
+      let result = await uploadImage(req.file.buffer, {folder: 'one-piece-store'})
+      
+      req.body.imageUrl = result.secure_url;
+    }
+
+    if (req.body.imageUrl && req.body.deleteImage) {
+      await deleteImage(req.body.imageUrl);
+      req.body.imageUrl = null;
+    }
 
     if (
       req.body.categories &&

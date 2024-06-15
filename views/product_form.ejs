@@ -2,7 +2,28 @@
   <div>
     <h1 class="text-center mb-8"><%= title %></h1>
 
-    <form class="form" method="post">
+    <form class="form" method="post"  enctype="multipart/form-data">
+      
+      <% if (product && product.imageUrl) { %>
+        <div  class="form-group justify-center">
+          <div style="max-width: 400px">
+            <img src="<%= product.imageUrl %>" alt="image">
+          </div>
+          <div>
+            <label for="deleteImage">Delete Image?</label>
+            <input type="checkbox" name="deleteImage" id="deleteImage">
+          </div>
+          <div>
+            <label for="image">Change Image</label>
+            <input 
+              id="image"
+              type="file"
+              name="image"
+            >
+            <input class="hidden" type="text" name="imageUrl" value="<%= product.imageUrl ? product.imageUrl : '' %>">
+          </div>
+        </div>
+      <% } %>
 
       <%# Name %>
       <div class="form-group">
@@ -77,6 +98,18 @@
           value="<%= product ? product.stock : '' %>"
         > 
       </div>
+
+      <%# Image field %>
+      <% if (!product || (product && !product.imageUrl)) { %>
+        <div class="form-group">
+          <label for="image">Image</label>
+          <input 
+            id="image"
+            type="file"
+            name="image"
+          > 
+        </div>
+      <% } %>
 
       <%# Description field %>
       <div class="form-group">

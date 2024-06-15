@@ -27,6 +27,11 @@ input, select, option, textarea {
   padding-block: 8px;
 }
 
+img {
+  display: block;
+  width: 100%;
+}
+
 /* ==================== */
 /* LAYOUT               */
 /* ==================== */
@@ -145,6 +150,10 @@ input, select, option, textarea {
   cursor: pointer;
 }
 
+.card__media {
+  background-color: green;
+}
+
 .card__content {
   padding-block: 16px;
   padding-inline: 16px;
@@ -220,6 +229,21 @@ input, select, option, textarea {
   border: 1px solid black;
   cursor: pointer;
 }
+
+/* custom components */
+.product-detail {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+.card__media {
+  width: clamp(300px, 100%, 500px);
+}
+
+.product-detail > .card__content {
+  flex: 1;
+}
+
 
 /* ==================== */
 /* UTILITES             */
