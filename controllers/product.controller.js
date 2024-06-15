@@ -3,6 +3,7 @@ const Category = require('../models/category');
 const Product = require('../models/product');
 const validator = require('../middlewares/validatorHandler');
 const { uploadImage, deleteImage } = require('../services/Image.service');
+const secretConfig = require('../configurations/secret.config');
 
 module.exports.getProductList = asyncHandler(async (req, res) => {
   const { category } = req.query;
@@ -109,6 +110,7 @@ module.exports.getUpdateProduct = asyncHandler(async (req, res, next) => {
     categories,
     product,
     errors: null,
+    secretQuestion: secretConfig.question,
   })
 });
 
@@ -143,6 +145,7 @@ module.exports.postUpdateProduct = [
         title: 'Add Product',
         product: req.body,
         categories: categories,
+        secretQuestion: secretConfig.question,
         errors: errors.array(),
       });
       return;
@@ -173,6 +176,7 @@ module.exports.getDeleteProduct = asyncHandler(async (req, res, next) => {
   res.render('product_delete', {
     title: 'Delete Product',
     product,
+    secretQuestion: process.env.SECRET_QUESTION
   })
 });
 

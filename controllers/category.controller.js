@@ -1,6 +1,7 @@
 const asyncHandler = require('express-async-handler');
 const { validateName, validationResult } = require('../middlewares/validatorHandler');
 const Category = require('../models/category');
+const secret = require('../configurations/secret.config');
 
 module.exports.getCategoryList = asyncHandler(async (req, res) => {
   res.send('getCategoryList: NOT YET IMPLEMENTED');
@@ -46,6 +47,7 @@ module.exports.getUpdateCategory = asyncHandler(async (req, res) => {
     title: 'Edit Category',
     category,
     errors: null,
+    secretQuestion: secret.question,
   })
 });
 
@@ -91,6 +93,7 @@ module.exports.getDeleteCategory = asyncHandler(async (req, res, next) => {
  res.render('category_delete', {
   title: 'Delete Category',
   category,
+  secretQuestion: secret.question,
  })
 });
 

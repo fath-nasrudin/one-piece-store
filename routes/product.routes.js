@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const ProductController = require('../controllers/product.controller');
 const upload = require('../middlewares/imageHandler');
+const { authorize } = require('../middlewares/authHandler');
 
 // add image handler middleware
 
@@ -14,12 +15,12 @@ router
 router
   .route('/:id/update')
   .get(ProductController.getUpdateProduct)
-  .post(upload.single('image'), ProductController.postUpdateProduct);
+  .post(upload.single('image'), authorize(), ProductController.postUpdateProduct);
 
 router
   .route('/:id/delete')
   .get(ProductController.getDeleteProduct)
-  .post(ProductController.postDeleteProduct);
+  .post( authorize(), ProductController.postDeleteProduct);
 
 router.route('/:id').get(ProductController.getProductDetail);
 

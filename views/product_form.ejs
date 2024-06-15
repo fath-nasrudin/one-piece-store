@@ -3,6 +3,9 @@
     <h1 class="text-center mb-8"><%= title %></h1>
 
     <form class="form" method="post"  enctype="multipart/form-data">
+      <% if (product && product._id) { %>
+        <%- include('secret_input') %>
+      <% } %>
       
       <% if (product && product.imageUrl) { %>
         <div  class="form-group justify-center">

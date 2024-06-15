@@ -1,5 +1,6 @@
 const router = require('express').Router();
 const CategoryController = require('../controllers/category.controller');
+const { authorize } = require('../middlewares/authHandler');
 
 router.route('/')
   .get(CategoryController.getCategoryList);
@@ -10,11 +11,11 @@ router.route('/create')
 
 router.route('/:id/update')
   .get(CategoryController.getUpdateCategory)
-  .post(CategoryController.postUpdateCategory);
+  .post(authorize(), CategoryController.postUpdateCategory);
 
 router.route('/:id/delete')
   .get(CategoryController.getDeleteCategory)
-  .post(CategoryController.postDeleteCategory);
+  .post(authorize(), CategoryController.postDeleteCategory);
 
 router.route('/:id')
   .get(CategoryController.getCategoryDetail);

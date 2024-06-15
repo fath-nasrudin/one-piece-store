@@ -6,6 +6,8 @@
     <form class="form mt-8" method="post">
       <p>Are you sure want to delete <strong><%= product.name %></strong>?</p>
 
+      <%- include('secret_input') %>
+
       <button type="submit" class="btn btn--red">Delete</button>
       <a href="/products" class="btn full-width">Cancel</a>
     </form>
